@@ -11,6 +11,8 @@ import java.util.List;
  *
  * @author RodrigoI
  */
+//En esta clase pongo todos los metodos que comunican con la base de datos, usando la controladora de persistencia de jpa
+//de los incidentes
 public class IncidenteData {
     ControladoraPersistencia cPers=new ControladoraPersistencia();
 

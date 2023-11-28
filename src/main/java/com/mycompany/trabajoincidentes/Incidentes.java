@@ -34,6 +34,17 @@ import java.util.stream.Collectors;
 public class Incidentes {
 
 public static void altaIncidente(){
+    //EN ESTE METODO EL USUARIO INGRESA UN CUIT Y USANDO JPA SE TRAE UNA LISTA DE CLIENTES
+    //LUEGO CON STREAMS SE FILTRA LA LISTA PARA QUEDARNOS CON EL CLIENTE CORRECTO
+    //LUEGO, TENIENDO EN CUENTA EL SERVICIO CONTRATADO, EL PROGRAMA TRAE UNA LISTA DE TECNICOS
+    //Y FILTRA AQUELLOS CUYA ESPECIALIDAD CONCUERDE CON EL SERVICIO DEL CLIENTE.
+    //LA LISTA DE TECNICOS ADECUADOS, SE MUESTRA Y EL USUARIO DEBE ELEGIR EL ID DEL TECNICO QUE QUIERE.
+    //LUEGO SE LE PIDE LA FECHA POSIBLE DE RESOLUCION DEL PROBLEMA Y UN GRADO DE DIFICULTAD
+    //USANDO JPA SE GRABA EN LA BD EL OBJETO CLIENTE, EL OBJETO TECNICO, LA FECHA ACTUAL (LOCALDATE.NOW)
+    //LA FECHA INGRESADA POR EL CLIENTE DD/MM/AAAA, LA DIFICULTAD Y EL ESTADO (por defecto Activa)
+    //EL ESTADO SIRVE PARA INDICAR QUE EL INCIDENTE AUN NO HA SIDO RESUELTO.
+    
+    
     Date fechaRes = null;
     Scanner leer=new Scanner(System.in);
     Cliente incCli=new Cliente();
@@ -177,6 +188,9 @@ iData.guardarIncidente(nuevoInc);
     
 }
 public static void listarIncAct(){
+    
+    //ESTE METODO LISTA TODOS LOS INCIDENTES CUYO VALOR DEL CAMPO ESTADO ES IGUAL A TRUE
+    //LO QUE SIGNIFICA QUE ESTA ACTIVO
 Scanner leer=new Scanner(System.in);
     IncidenteData iData=new IncidenteData();
 ArrayList<Incidente> listadoI=(ArrayList<Incidente>) iData.buscarIncidente();
@@ -193,6 +207,10 @@ List<Incidente> incidentesActivos = listadoI.stream()
 
 }
 public static void finalizarIncidente(){
+    
+    //A TRAVES DE ESTE METODO, SE PUEDE INDICAR QUE UN INCIDENTE YA SE HA RESUELTO, LO QUE CAMBIARA SU ESTADO DE ACTIVO A INCACTIVO
+    //EL METODO MUESTRA UNA LISTA DE LOS INCIDENTES ACTIVOS CON SU ID, EL USUARIO ELIJE EL ID QUE DESEA MARCAR COMO FINALIZADO Y LISTO
+    
     IncidenteData iData=new IncidenteData();
     Incidente modInc=new Incidente();
     Scanner leer=new Scanner (System.in);
@@ -214,6 +232,7 @@ public static void finalizarIncidente(){
 
 }
 public static void listarIncRes(){
+// ESTE METODO MUESTRA UN LISTADO DE LOS INCIDENTES CON ESTADO INACTIVO (YA RESUELTOS)    
 Scanner leer=new Scanner(System.in);
     IncidenteData iData=new IncidenteData();
     System.out.println("");    
@@ -232,6 +251,9 @@ ArrayList<Incidente> listadoI=(ArrayList<Incidente>) iData.buscarIncidente();
 }
 
 public static void tecnicoMasUsado(){
+   //ESTE METODO AGRUPA LOS REGISTROS DE LA TABLA INCIDENTES, POR TECNICO, Y LOS CUENTA, PARA SACAR EL DATO DE QUE TECNICO FUE EL MAS
+   //UTILIZADO (NO DISTINGUE POR INCIDENTES ACTIVOS O INACTIVOS.
+    
 Scanner leer=new Scanner (System.in);
     IncidenteData iData=new IncidenteData();
 List<Incidente> listadoI=iData.buscarIncidente();

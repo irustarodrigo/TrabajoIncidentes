@@ -59,7 +59,7 @@ public static void altaTecnico(){
       
     Scanner leer3=new Scanner(System.in);
     System.out.println("ALTA DE TECNICOS");
-  
+    //HAGO QUE EL USUARIO INGRESE POR CONSOLA TODOS LOS DATOS Y LOS GUARDO EN VARIABLES ACORDE
     String nomApe;
     String dni;
     String especialidad=null;
@@ -105,7 +105,9 @@ public static void altaTecnico(){
     contacto=leer3.nextLine();
     
     estado=true;
+    //CREO UN NUEVO OBJETO DE TIPO TECNICO Y LE PASO TODOS LOS DATOS EXCEPTO EL ID QUE SE VA A GENERAR SOLO EN LA BD
     Tecnico nuevoTec=new Tecnico(nomApe, dni, especialidad,telefono,contacto,estado);
+    //UTILIZO EL METODO DE JPA (CREATE)QUE ESTA INCLUIDO EN GUARDARTECNICO()
     td.guardarTecnico(nuevoTec);
     System.out.println("TECNICO GUARDADO EN LA BASE DE DATOS CON EXITO");
    
@@ -117,13 +119,19 @@ Scanner leer=new Scanner(System.in);
     System.out.println("BAJA LOGICA DE TECNICOS POR DNI");
     System.out.println("Ingrese el Dni:");
     String dni=leer.nextLine();
+    
+    //USANDO JPA FINDENTITIES TRAIGO UNA LISTA DE TODOS LOS TECNICOS
+    
     ArrayList<Tecnico> listado=(ArrayList<Tecnico>) td.buscarTecnico();
+    
+    //USANDO STREAMS FILTRO PARA ENCONTRAR EL TECNICO CUYO DNI ES IGUAL AL QUE INGRESÓ EL USUARIO
     Optional<Integer> idTec = listado.stream().filter(tecnico -> tecnico.getDni().equals(dni)).map(Tecnico::getIdTecnico).findFirst();
     if (idTec.isPresent()) {
             Integer id = idTec.get();
             int idBuscar=id.intValue();
             tecBaja=td.buscarTecId(idBuscar);
             tecBaja.setEstado(false);
+            // USANDO JPA (EDIT) CAMBIO EL CAMPO ESTADO DE TRUE A FALSE PARA INDICAR QUE ESE TECNICO SE HA DADO DE BAJA
             td.modificarTecnico(tecBaja);
             System.out.println("SE HA INACTIVADO EL TECNICO....");
            
@@ -133,6 +141,11 @@ Scanner leer=new Scanner(System.in);
    
 }
 public static void modificaTecnico(){
+    //EN ESTE METODO, Y SIGUIENDO LA LOGICA DE LOS METODOS ANTERIORES
+    //EL USUARIO INGRESA UN DNI, RECORRO LA LISTA DE TECNICOS HASTA ENCONTRAR EL TECNICO CORRECTO
+    //VOY MOSTRANDO LOS DATOS Y PIDIENDO AL USUARIO QUE INGRESE LOS DATOS NUEVOS PARA CADA CASO.
+    //LUEGO SE GUARDAN LOS CAMBIOS EN LA BASE DE DATOS
+    
     String nomApe;
     String Mdni;
     String especialidad=null;
@@ -232,6 +245,8 @@ Scanner leer=new Scanner(System.in);
             
 }
 public static void ListarTecnicos(){
+    
+    //ESTE METODO TRAE UNA LISTA DE TODOS LOS TECNICOS Y LUEGO MUESTRA LOS DATOS QUE QUIERO
     Scanner leer=new Scanner (System.in);
     System.out.println("--------------------------------------------------------------------------");
     System.out.println("**** LISTADO GENERAL DE TECNICOS ****");

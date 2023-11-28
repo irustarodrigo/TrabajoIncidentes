@@ -11,6 +11,11 @@ import java.util.Scanner;
  *
  * @author RodrigoI
  */
+
+//CLASE PRINCIPAL DEL PROGRAMA, DESDE AQUI SE LLAMA A LA IMPRESION DEL MENU, Y SE ENCUENTRA LA PROGRAMACION DEL SWITCH Y LOS CASE PARA
+//LLAMAR A CADA METODO CORRECTO SEGUN LO REQUERIDO.
+//SE PUEDE INGRESAR A SUB MENU DE CLIENTE Y TENCICO Y VOLVER... MIENTRAS NO SE TIPEE 10, ESTARA DENTRO DEL WHILE Y SE REPETIRA
+
 public class TrabajoIncidentes {
 
     public static void main(String[] args) {
@@ -62,8 +67,14 @@ Scanner leer=new Scanner(System.in);
         System.out.println("--------------------------------------------------");    
     Varios.menuPrincipal();
     System.out.print("Ingrese una Opcion:");
-        opcion=leer.nextInt();
-    
+    try{
+    opcion=leer.nextInt();
+    }
+    catch (NumberFormatException er){
+        System.out.println("Debe ingresar solo numeros");
+        System.out.println("Reinicie el programa");
+        return;
+    }
     
     }
 

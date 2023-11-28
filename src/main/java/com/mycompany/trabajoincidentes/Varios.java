@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.trabajoincidentes;
-
+//EN ESTA CLASE SOLO ESTAN LAS IMPRESIONES DE LOS MENUS
 /**
  *
  * @author RodrigoI

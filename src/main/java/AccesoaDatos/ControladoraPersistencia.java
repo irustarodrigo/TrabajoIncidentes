@@ -16,6 +16,9 @@ import java.util.logging.Logger;
  *
  * @author RodrigoI
  */
+
+//en esta clase, se agrupan todos los metodos que comunican las entidades con los metodos create, edit, (Destroy no uso) Find...
+
 public class ControladoraPersistencia {
     ClienteJpaController cliJpa=new ClienteJpaController();
     TecnicoJpaController tecJpa=new TecnicoJpaController();
